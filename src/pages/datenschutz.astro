@@ -1,0 +1,207 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { companyData } from '@content/company-data';
+
+const pageTitle = 'Datenschutz | Diell Dienstleistungen';
+const pageDescription = 'Datenschutzerklärung von Diell Dienstleistungen. Informationen zum Umgang mit Ihren personenbezogenen Daten.';
+
+const breadcrumbs = [
+  { name: 'Datenschutz', url: '/datenschutz/' }
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  noindex={true}
+>
+  <section class="bg-neutral-50 py-12 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <h1 class="text-3xl lg:text-4xl font-bold text-neutral-900 mt-6 mb-8">
+        Datenschutzerklärung
+      </h1>
+      
+      <div class="bg-white rounded-xl shadow-soft p-8 lg:p-12 space-y-8">
+        <!-- Einleitung -->
+        <section aria-labelledby="intro-heading">
+          <h2 id="intro-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            1. Datenschutz auf einen Blick
+          </h2>
+          
+          <h3 class="text-lg font-semibold text-neutral-900 mb-3">
+            Allgemeine Hinweise
+          </h3>
+          <p class="text-neutral-600">
+            Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen 
+            Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, 
+            mit denen Sie persönlich identifiziert werden können.
+          </p>
+        </section>
+
+        <!-- Verantwortlicher -->
+        <section aria-labelledby="controller-heading">
+          <h2 id="controller-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            2. Verantwortlicher
+          </h2>
+          <p class="text-neutral-600 mb-4">
+            Verantwortlicher für die Datenverarbeitung auf dieser Website ist:
+          </p>
+          <address class="not-italic text-neutral-600 space-y-1 mb-4">
+            <p class="font-semibold text-neutral-900">{companyData.name}</p>
+            <p>{companyData.owner}</p>
+            <p>{companyData.address.street}</p>
+            <p>{companyData.address.postalCode} {companyData.address.city}</p>
+            <p>{companyData.address.country}</p>
+          </address>
+          <p class="text-neutral-600">
+            <span class="font-medium">Telefon:</span>{' '}
+            <a href={`tel:${companyData.phone.replace(/\s/g, '')}`} class="text-primary-600 hover:underline">
+              {companyData.phone}
+            </a>
+          </p>
+          <p class="text-neutral-600">
+            <span class="font-medium">E-Mail:</span>{' '}
+            <a href={`mailto:${companyData.email}`} class="text-primary-600 hover:underline">
+              {companyData.email}
+            </a>
+          </p>
+        </section>
+
+        <!-- Datenerfassung -->
+        <section aria-labelledby="collection-heading">
+          <h2 id="collection-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            3. Datenerfassung auf unserer Website
+          </h2>
+          
+          <h3 class="text-lg font-semibold text-neutral-900 mb-3">
+            Server-Log-Dateien
+          </h3>
+          <p class="text-neutral-600 mb-4">
+            Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten 
+            Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
+          </p>
+          <ul class="list-disc list-inside text-neutral-600 space-y-1 mb-4">
+            <li>Browsertyp und Browserversion</li>
+            <li>Verwendetes Betriebssystem</li>
+            <li>Referrer URL</li>
+            <li>Hostname des zugreifenden Rechners</li>
+            <li>Uhrzeit der Serveranfrage</li>
+            <li>IP-Adresse</li>
+          </ul>
+          <p class="text-neutral-600">
+            Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. 
+            Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. 
+            Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien 
+            Darstellung und der Optimierung seiner Website.
+          </p>
+
+          <h3 class="text-lg font-semibold text-neutral-900 mb-3 mt-6">
+            Kontaktformular / WhatsApp-Kontakt
+          </h3>
+          <p class="text-neutral-600 mb-4">
+            Wenn Sie uns per WhatsApp oder Telefon kontaktieren, werden Ihre angegebenen Daten 
+            zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. 
+            Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+          </p>
+          <p class="text-neutral-600">
+            Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, 
+            sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung 
+            vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung 
+            auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen.
+          </p>
+        </section>
+
+        <!-- Cookies -->
+        <section aria-labelledby="cookies-heading">
+          <h2 id="cookies-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            4. Cookies
+          </h2>
+          <p class="text-neutral-600 mb-4">
+            Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf 
+            Ihrem Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, 
+            effektiver und sicherer zu machen.
+          </p>
+          <p class="text-neutral-600 mb-4">
+            Einige Cookies sind "sessionbasiert" und werden nach Ende Ihres Besuchs automatisch gelöscht. 
+            Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies 
+            ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.
+          </p>
+          <p class="text-neutral-600 mb-4">
+            Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden 
+            und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder 
+            generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers 
+            aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+          </p>
+          <p class="text-neutral-600">
+            <a href="/cookies/" class="text-primary-600 hover:underline">
+              → Detaillierte Cookie-Informationen
+            </a>
+          </p>
+        </section>
+
+        <!-- Rechte -->
+        <section aria-labelledby="rights-heading">
+          <h2 id="rights-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            5. Ihre Rechte
+          </h2>
+          <p class="text-neutral-600 mb-4">
+            Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten 
+            personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung 
+            sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten.
+          </p>
+          <p class="text-neutral-600 mb-4">
+            Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit 
+            unter der im Impressum angegebenen Adresse an uns wenden.
+          </p>
+          <p class="text-neutral-600 mb-4">
+            Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu:
+          </p>
+          <address class="not-italic text-neutral-600">
+            <p class="font-semibold">Der Landesbeauftragte für den Datenschutz Baden-Württemberg</p>
+            <p>Königstraße 10a</p>
+            <p>70173 Stuttgart</p>
+            <p>
+              <a href="https://www.baden-wuerttemberg.datenschutz.de" class="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                www.baden-wuerttemberg.datenschutz.de
+              </a>
+            </p>
+          </address>
+        </section>
+
+        <!-- SSL-Verschlüsselung -->
+        <section aria-labelledby="ssl-heading">
+          <h2 id="ssl-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            6. SSL-Verschlüsselung
+          </h2>
+          <p class="text-neutral-600">
+            Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher 
+            Inhalte eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, 
+            dass die Adresszeile des Browsers von "http://" auf "https://" wechselt und an dem 
+            Schloss-Symbol in Ihrer Browserzeile.
+          </p>
+        </section>
+
+        <!-- Widerspruch -->
+        <section aria-labelledby="objection-heading">
+          <h2 id="objection-heading" class="text-xl font-bold text-neutral-900 mb-4">
+            7. Widerspruch gegen Werbe-Mails
+          </h2>
+          <p class="text-neutral-600">
+            Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung 
+            von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. 
+            Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten 
+            Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.
+          </p>
+        </section>
+      </div>
+      
+      <p class="text-center text-sm text-neutral-500 mt-8">
+        Stand: Februar 2026
+      </p>
+    </div>
+  </section>
+</Layout>

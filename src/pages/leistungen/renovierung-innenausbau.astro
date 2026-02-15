@@ -1,0 +1,208 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import FAQ from '@components/FAQ.astro';
+import WhatsAppButton from '@components/WhatsAppButton.astro';
+import PhoneButton from '@components/WhatsAppButton.astro';
+import { services, companyData, generateServiceSchema, generateFAQSchema } from '@content/company-data';
+
+const service = services.find(s => s.slug === 'renovierung-innenausbau')!;
+
+const breadcrumbs = [
+  { name: 'Leistungen', url: '/leistungen/' },
+  { name: service.shortTitle, url: `/leistungen/${service.slug}/` }
+];
+
+const faqs = [
+  {
+    question: 'Was umfasst eine Komplettrenovierung?',
+    answer: 'Eine Komplettrenovierung beinhaltet alle Arbeiten von der Entkernung über Trockenbau, Elektroinstallation, Spachtelarbeiten bis hin zu Bodenbelägen und Malerarbeiten. Wir begleiten Sie von der ersten Planung bis zur Schlüsselübergabe.'
+  },
+  {
+    question: 'Wie lange dauert eine Wohnungsrenovierung?',
+    answer: 'Die Dauer hängt vom Umfang ab: Einzelne Räume (1-2 Wochen), komplette Wohnung 60-80m² (4-6 Wochen), größere Objekte (8-12 Wochen). Wir erstellen einen detaillierten Zeitplan und halten Sie über den Fortschritt auf dem Laufenden.'
+  },
+  {
+    question: 'Kann ich während der Renovierung in der Wohnung bleiben?',
+    answer: 'Bei größeren Renovierungen empfehlen wir, vorübergehend auszuquartieren. Bei Teilrenovierungen kann oft stufenweise vorgegangen werden, sodass immer ein bewohnbarer Bereich bleibt. Wir besprechen dies individuell mit Ihnen.'
+  },
+  {
+    question: 'Gibt es Garantie auf die Renovierungsarbeiten?',
+    answer: 'Ja, auf alle unsere Arbeiten geben wir eine 2-jährige Gewährleistung gemäß BGB. Bei Materialien gelten die Herstellergarantien. Wir dokumentieren alle Arbeiten und stehen auch nach Projektabschluss für Rückfragen zur Verfügung.'
+  }
+];
+
+const serviceSchema = generateServiceSchema(service);
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<Layout 
+  title={service.metaTitle}
+  description={service.metaDescription}
+  breadcrumbs={breadcrumbs}
+  schema={[serviceSchema, faqSchema]}
+>
+  <section class="bg-neutral-900 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <div class="mt-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            {service.h1}
+          </h1>
+          <p class="text-neutral-400 text-lg mb-6">
+            Komplette Renovierungslösungen für Ihr Zuhause oder Gewerbeobjekt. 
+            Wir begleiten Sie von der Planung bis zur Schlüsselübergabe – aus einer Hand.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <WhatsAppButton 
+              variant="whatsapp" 
+              message="Hallo, ich plane eine Renovierung und suche einen kompetenten Partner. Können wir ein Angebot besprechen?"
+              size="lg"
+            >
+              Per WhatsApp schreiben
+            </WhatsAppButton>
+            <PhoneButton variant="outline" size="lg" class="border-neutral-500 text-white hover:bg-white/10">
+              Anrufen
+            </PhoneButton>
+          </div>
+        </div>
+        
+        <div class="aspect-video bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl overflow-hidden">
+          <img 
+            src="/images/renovierung.jpeg" 
+            alt="Renovierung und Innenausbau - Komplette Modernisierung von Wohnräumen"
+            class="w-full h-full object-cover"
+            width="800"
+            height="450"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="prose prose-lg max-w-none mb-12">
+        <p class="text-xl text-neutral-600 leading-relaxed">
+          Eine umfassende <strong>Renovierung und Innenausbau</strong> ist mehr als die Summe einzelner Handwerksleistungen. 
+          In Laichingen bieten wir Ihnen eine Komplettlösung, die alle Gewerke koordiniert und nahtlos aufeinander abstimmt. 
+          Von der ersten Idee bis zum fertigen Raumkonzept – wir sind Ihr verlässlicher Partner.
+        </p>
+      </div>
+
+      <section class="mb-12" aria-labelledby="services-heading">
+        <h2 id="services-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Unser Renovierungsservice
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Wir begleiten Sie durch alle Phasen Ihres Projekts:
+          </p>
+          <ul class="space-y-3 mt-4">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">1</span>
+              <span><strong>Beratung & Planung:</strong> Vor-Ort-Termin, Bedarfsermittlung, Konzeptentwicklung und Kostenschätzung.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">2</span>
+              <span><strong>Demontage & Entsorgung:</strong> Professioneller Rückbau und fachgerechte Entsorgung aller Materialien.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">3</span>
+              <span><strong>Trockenbau & Innenausbau:</strong> Wände, Decken, Unterkonstruktionen nach Ihren Wünschen.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">4</span>
+              <span><strong>Oberflächenveredelung:</strong> Spachteln, Maler- und Tapezierarbeiten durch erfahrene Partner.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">5</span>
+              <span><strong>Schlüsselfertige Übergabe:</strong> Endreinigung, Qualitätskontrolle und Dokumentation.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="included-heading">
+        <h2 id="included-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Was ist inbegriffen?
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <div class="grid sm:grid-cols-2 gap-4 mt-6 not-prose">
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Projektmanagement</h4>
+              <p class="text-sm">Ein Ansprechpartner, der alle Gewerke koordiniert und den Zeitplan überwacht.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Materialbeschaffung</h4>
+              <p class="text-sm">Wir besorgen alle benötigten Materialien in gewährleisteter Qualität.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Subunternehmer-Koordination</h4>
+              <p class="text-sm">Zuverlässige Partner für Elektro, Sanitär, Maler und Bodenleger.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Qualitätssicherung</h4>
+              <p class="text-sm">Regelmäßige Baubesichtigungen und Zwischenabnahmen aller Gewerke.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Typische Zeitpläne
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Realistische Zeitplanung für verschiedene Projektgrößen:
+          </p>
+          <div class="mt-6 space-y-3 not-prose">
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Einzelner Raum (Renovierung)</span>
+              <span class="text-primary-700 font-semibold">1-2 Wochen</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">2-3 Zimmer Wohnung</span>
+              <span class="text-primary-700 font-semibold">3-4 Wochen</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Komplette Wohnung (60-80m²)</span>
+              <span class="text-primary-700 font-semibold">4-6 Wochen</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Mehrfamilienhaus/Gewerbe</span>
+              <span class="text-primary-700 font-semibold">Nach Absprache</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bg-gradient-to-br from-primary-400 to-accent-400 rounded-2xl p-8 text-center">
+        <h3 class="text-xl font-bold text-neutral-900 mb-3">
+          Starten Sie Ihr Renovierungsprojekt
+        </h3>
+        <p class="text-neutral-800 mb-6">
+          Kontaktieren Sie uns für eine kostenlose Erstberatung. Gemeinsam entwickeln wir das perfekte Konzept für Ihre Räume.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WhatsAppButton 
+            variant="primary"
+            message={`Hallo, ich interessiere mich für Ihre Leistung "${service.shortTitle}". Können wir ein Angebot besprechen?`}
+          >
+            Per WhatsApp schreiben
+          </WhatsAppButton>
+          <PhoneButton variant="outline" class="border-neutral-700 text-neutral-900 hover:bg-neutral-900/10">
+            Anrufen
+          </PhoneButton>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <FAQ items={faqs} title={`Häufige Fragen zu ${service.shortTitle}`} />
+</Layout>

@@ -1,0 +1,215 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import FAQ from '@components/FAQ.astro';
+import WhatsAppButton from '@components/WhatsAppButton.astro';
+import PhoneButton from '@components/PhoneButton.astro';
+import { services, companyData, generateServiceSchema, generateFAQSchema } from '@content/company-data';
+
+const service = services.find(s => s.slug === 'trockenbau-unterkonstruktion')!;
+
+const breadcrumbs = [
+  { name: 'Leistungen', url: '/leistungen/' },
+  { name: service.shortTitle, url: `/leistungen/${service.slug}/` }
+];
+
+const faqs = [
+  {
+    question: 'Was sind CD- und UD-Profile im Trockenbau?',
+    answer: 'CD-Profile (Ceiling Distribution) sind die vertikalen Tragprofile für Wände und Decken, während UD-Profile (Ultimate Distribution) als umlaufende Randprofile dienen. Sie bilden das stabile Gerüst für Gipskartonplatten.'
+  },
+  {
+    question: 'Wie lange dauert die Montage einer Unterkonstruktion?',
+    answer: 'Die Montagezeit hängt von der Raumgröße ab. Ein Standardraum (20m²) kann in 1-2 Tagen mit Unterkonstruktion versehen werden. Größere Projekte besprechen wir individuell mit Ihnen.'
+  },
+  {
+    question: 'Können Vorhangschienen direkt in die Unterkonstruktion integriert werden?',
+    answer: 'Ja, wir planen und montieren Vorhangschienen direkt in die Unterkonstruktion für eine saubere, deckenbündige Optik. Dies wird bereits in der Planungsphase berücksichtigt.'
+  },
+  {
+    question: 'Welche Vorteile hat eine professionelle Unterkonstruktion?',
+    answer: 'Eine fachgerechte Unterkonstruktion garantiert Stabilität, ermöglicht die Integration von Dämmung und Elektroinstallationen und schafft die Basis für gerade, ebene Oberflächen.'
+  }
+];
+
+const serviceSchema = generateServiceSchema(service);
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<Layout 
+  title={service.metaTitle}
+  description={service.metaDescription}
+  breadcrumbs={breadcrumbs}
+  schema={[serviceSchema, faqSchema]}
+>
+  <!-- Hero -->
+  <section class="bg-neutral-900 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <div class="mt-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            {service.h1}
+          </h1>
+          <p class="text-neutral-400 text-lg mb-6">
+            Solide Basis für Ihren Trockenbau. Wir montieren CD- und UD-Profile mit höchster Präzision 
+            für Wände, Decken und Vorhangschienen in Laichingen und Umgebung.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <WhatsAppButton 
+              variant="whatsapp" 
+              message="Hallo, ich benötige eine professionelle Trockenbau-Unterkonstruktion. Können wir ein Angebot besprechen?"
+              size="lg"
+            >
+              Per WhatsApp schreiben
+            </WhatsAppButton>
+            <PhoneButton variant="outline" size="lg" class="border-neutral-500 text-white hover:bg-white/10">
+              Anrufen
+            </PhoneButton>
+          </div>
+        </div>
+        
+        <div class="aspect-video bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl overflow-hidden">
+          <img 
+            src="/images/trockenbau.jpeg" 
+            alt="Trockenbau Unterkonstruktion - CD/UD Profile Montage"
+            class="w-full h-full object-cover"
+            width="800"
+            height="450"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Intro -->
+      <div class="prose prose-lg max-w-none mb-12">
+        <p class="text-xl text-neutral-600 leading-relaxed">
+          Die <strong>CD/UD-Profile Montage</strong> bildet das fundamentale Gerüst für jeden professionellen Trockenbau. 
+          In Laichingen und der Region sind wir Ihr Experte für die fachgerechte Installation dieser tragenden Elemente. 
+          Eine präzise ausgeführte Unterkonstruktion ist entscheidend für die Qualität und Langlebigkeit Ihrer Wände und Decken.
+        </p>
+      </div>
+
+      <!-- Section 1: Vorgehen -->
+      <section class="mb-12" aria-labelledby="process-heading">
+        <h2 id="process-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Unser Vorgehen bei der Profilmontage
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Jede Unterkonstruktion beginnt mit einer sorgfältigen Vermessung und Planung. Wir achten dabei auf:
+          </p>
+          <ul class="space-y-2 mt-4">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">1</span>
+              <span><strong>Precise Vermessung:</strong> Jeder Millimeter zählt bei der Planung Ihrer Unterkonstruktion.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">2</span>
+              <span><strong>Materialauswahl:</strong> Hochwertige CD-Profile (60/27mm) und UD-Profile (28/27mm) in entsprechender Stärke.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">3</span>
+              <span><strong>Fachgerechte Befestigung:</strong> Verwendung geeigneter Dübel und Schrauben für maximale Stabilität.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 text-sm font-bold">4</span>
+              <span><strong>Lasergerechte Ausrichtung:</strong> Einsatz moderner Messtechnik für perfekt ebene Flächen.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 2: Material & Qualität -->
+      <section class="mb-12" aria-labelledby="quality-heading">
+        <h2 id="quality-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Material und Qualitätsanspruch
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Wir setzen ausschließlich auf geprüfte Stahlprofile nach DIN-Norm. Die Verwendung hochwertiger Materialien garantiert:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6 not-prose">
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Stabilität</h4>
+              <p class="text-sm">Tragfähige Konstruktion für Gipskartonplatten und Zusatzlasten wie Leuchten.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Schallschutz</h4>
+              <p class="text-sm">Optimale Basis für Dämmmaterialien zur Geräuschreduktion.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Brandschutz</h4>
+              <p class="text-sm">Zertifizierte Systeme für erhöhte Sicherheitsanforderungen.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Langlebigkeit</h4>
+              <p class="text-sm">Rostfreie Materialien für jahrzehntelange Haltbarkeit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Zeitrahmen -->
+      <section class="mb-12" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Zeitrahmen und Ablauf
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Die Dauer der Profilmontage hängt von der Projektgröße ab. Typische Zeiträume für Trockenbau-Unterkonstruktionen:
+          </p>
+          <div class="mt-6 space-y-3 not-prose">
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Decke (20-30m²)</span>
+              <span class="text-primary-700 font-semibold">1-2 Arbeitstage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Trennwand (10-15m²)</span>
+              <span class="text-primary-700 font-semibold">1 Arbeitstag</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Vorhangschienen-Integration</span>
+              <span class="text-primary-700 font-semibold">2-3 Stunden</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Komplette Wohnung</span>
+              <span class="text-primary-700 font-semibold">3-5 Arbeitstage</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Box -->
+      <div class="bg-gradient-to-br from-primary-400 to-accent-400 rounded-2xl p-8 text-center">
+        <h3 class="text-xl font-bold text-neutral-900 mb-3">
+          Benötigen Sie eine professionelle Unterkonstruktion?
+        </h3>
+        <p class="text-neutral-800 mb-6">
+          Kontaktieren Sie uns für ein unverbindliches Angebot. Wir beraten Sie gerne persönlich vor Ort in Laichingen.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WhatsAppButton 
+            variant="primary"
+            message={`Hallo, ich interessiere mich für Ihre Leistung "${service.shortTitle}". Können wir ein Angebot besprechen?`}
+          >
+            Per WhatsApp schreiben
+          </WhatsAppButton>
+          <PhoneButton variant="outline" class="border-neutral-700 text-neutral-900 hover:bg-neutral-900/10">
+            Anrufen
+          </PhoneButton>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- FAQ Section -->
+  <FAQ items={faqs} title={`Häufige Fragen zu ${service.shortTitle}`} />
+</Layout>

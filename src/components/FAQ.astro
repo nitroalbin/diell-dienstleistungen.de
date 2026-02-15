@@ -1,0 +1,71 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  title?: string;
+}
+
+const { items, title = 'Häufig gestellte Fragen' } = Astro.props;
+---
+
+<section class="py-12 lg:py-16 bg-neutral-50" aria-labelledby="faq-heading">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 id="faq-heading" class="text-2xl lg:text-3xl font-bold text-neutral-900 text-center mb-8">
+      {title}
+    </h2>
+    
+    <div class="space-y-4">
+      {items.map((item, index) => (
+        <details 
+          class="group bg-white rounded-xl shadow-soft border border-neutral-100 overflow-hidden"
+          data-faq-item
+        >
+          <summary 
+            class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-neutral-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-inset"
+            role="button"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <h3 class="text-base font-semibold text-neutral-900 pr-4">
+              {item.question}
+            </h3>
+            <span class="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center group-hover:bg-primary-200 transition-colors">
+              <svg 
+                class="w-5 h-5 text-primary-600 transition-transform duration-300 group-open:rotate-180" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div 
+            id={`faq-answer-${index}`}
+            class="px-5 pb-5 text-neutral-600 leading-relaxed"
+          >
+            <div class="pt-2 border-t border-neutral-100">
+              <p class="pt-4">{item.answer}</p>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Enhance FAQ accessibility - update aria-expanded on toggle
+  document.querySelectorAll('details[data-faq-item]').forEach(details => {
+    const summary = details.querySelector('summary');
+    
+    details.addEventListener('toggle', () => {
+      summary.setAttribute('aria-expanded', details.open.toString());
+    });
+  });
+</script>

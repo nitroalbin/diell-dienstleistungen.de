@@ -1,0 +1,211 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import FAQ from '@components/FAQ.astro';
+import WhatsAppButton from '@components/WhatsAppButton.astro';
+import PhoneButton from '@components/WhatsAppButton.astro';
+import { services, companyData, generateServiceSchema, generateFAQSchema } from '@content/company-data';
+
+const service = services.find(s => s.slug === 'spachtelarbeiten')!;
+
+const breadcrumbs = [
+  { name: 'Leistungen', url: '/leistungen/' },
+  { name: service.shortTitle, url: `/leistungen/${service.slug}/` }
+];
+
+const faqs = [
+  {
+    question: 'Warum sind professionelle Spachtelarbeiten wichtig?',
+    answer: 'Spachtelarbeiten bilden die Basis für ein perfektes Oberflächenfinish. Unebenheiten, Risse oder Poren würden durch Farbe oder Tapete sichtbar werden. Professionell gespachtelte Wände garantieren ein makelloses Endergebnis.'
+  },
+  {
+    question: 'Wie lange muss Spachtelmasse trocknen?',
+    answer: 'Die Trockenzeit hängt vom Produkt und der Schichtdicke ab. Üblicherweise: 4-6 Stunden für Feinspachtel, 12-24 Stunden für Füllspachtel. Wir achten auf optimale Bedingungen (Temperatur, Lüftung) für schnelles Trocknen.'
+  },
+  {
+    question: 'Was kosten Spachtelarbeiten pro Quadratmeter?',
+    answer: 'Die Kosten variieren je nach Ausgangszustand. Als Richtwert: 15-25€/m² für Feinspachteln auf gutem Untergrund, 25-40€/m² für Renovierungsspachteln mit Grundierung. Wir erstellen Ihnen gerne ein individuelles Angebot.'
+  },
+  {
+    question: 'Übernehmen Sie auch das Streichen nach dem Spachteln?',
+    answer: 'Wir konzentrieren uns auf die Spachtelarbeiten als spezialisierte Leistung. Für Malerarbeiten empfehlen wir Ihnen gerne erfahrene Partner aus der Region. Gemeinsam garantieren wir ein perfektes Gesamtergebnis.'
+  }
+];
+
+const serviceSchema = generateServiceSchema(service);
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<Layout 
+  title={service.metaTitle}
+  description={service.metaDescription}
+  breadcrumbs={breadcrumbs}
+  schema={[serviceSchema, faqSchema]}
+>
+  <section class="bg-neutral-900 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <div class="mt-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            {service.h1}
+          </h1>
+          <p class="text-neutral-400 text-lg mb-6">
+            Perfekte Oberflächen durch fachgerechte Spachtelarbeiten. 
+            Wir sorgen für glatte Wände und Decken als Basis für hochwertige Malerarbeiten.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <WhatsAppButton 
+              variant="whatsapp" 
+              message="Hallo, ich benötige professionelle Spachtelarbeiten für mein Renovierungsprojekt. Können wir ein Angebot besprechen?"
+              size="lg"
+            >
+              Per WhatsApp schreiben
+            </WhatsAppButton>
+            <PhoneButton variant="outline" size="lg" class="border-neutral-500 text-white hover:bg-white/10">
+              Anrufen
+            </PhoneButton>
+          </div>
+        </div>
+        
+        <div class="aspect-video bg-gradient-to-br from-accent-100 to-primary-100 rounded-2xl overflow-hidden">
+          <img 
+            src="/images/spachtelarbeiten.jpeg" 
+            alt="Spachtelarbeiten - Perfekt geglättete Wände und Decken"
+            class="w-full h-full object-cover"
+            width="800"
+            height="450"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="prose prose-lg max-w-none mb-12">
+        <p class="text-xl text-neutral-600 leading-relaxed">
+          <strong>Spachtelarbeiten</strong> sind die unsichtbare Basis jedes gelungenen Renovierungsprojekts. 
+          In Laichingen und Umgebung sind wir auf die perfekte Vorbereitung von Wänden und Decken spezialisiert – 
+          denn nur eine makellose Untergrundvorbereitung garantiert ein überzeugendes Endergebnis.
+        </p>
+      </div>
+
+      <section class="mb-12" aria-labelledby="process-heading">
+        <h2 id="process-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Unser Spachtel-Prozess
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Professionelle Spachtelarbeiten erfordern mehrere aufeinander abgestimmte Schritte:
+          </p>
+          <ul class="space-y-3 mt-4">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">1</span>
+              <span><strong>Oberflächenvorbereitung:</strong> Reinigung, Entfernen loser Stellen, Grundierung für bessere Haftung.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">2</span>
+              <span><strong>Grobspachtelung:</strong> Ausgleich größerer Unebenheiten und Füllen von Löchern und Rissen.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">3</span>
+              <span><strong>Feinspachtelung:</strong> Mehrere dünne Schichten für eine ebene, porenfreie Oberfläche.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">4</span>
+              <span><strong>Schleifen:</strong> Zwischen jedem Arbeitsschritt wird geschliffen für perfekte Glätte.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">5</span>
+              <span><strong>Finish:</strong> Finaler Schliff und Staubentfernung für die Übergabe an den Maler.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="materials-heading">
+        <h2 id="materials-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Materialien und Qualität
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Wir setzen auf bewährte, hochwertige Spachtelmassen führender Hersteller:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6 not-prose">
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Füllspachtel</h4>
+              <p class="text-sm">Für große Flächen und Ausgleichsschichten. Schnell trocknend und gut schleifbar.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Feinspachtel</h4>
+              <p class="text-sm">Für die Endbearbeitung und perfekte Oberflächenglätte vor dem Streichen.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Renovierspachtel</h4>
+              <p class="text-sm">Speziell für Altsubstrate. Haftet auch auf kritischen Untergründen.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Faser-Spachtel</h4>
+              <p class="text-sm">Für Rissüberbrückung und erhöhte Stabilität auf beweglichen Untergründen.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Zeitrahmen und Trocknung
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Spachtelarbeiten erfordern Pausen für die Trocknung:
+          </p>
+          <div class="mt-6 space-y-3 not-prose">
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Wandvorbereitung (20m²)</span>
+              <span class="text-accent-700 font-semibold">1-2 Tage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Deckenvorbereitung (20m²)</span>
+              <span class="text-accent-700 font-semibold">2-3 Tage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Gipskartonnachbehandlung</span>
+              <span class="text-accent-700 font-semibold">1-2 Tage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Komplette Wohnung</span>
+              <span class="text-accent-700 font-semibold">5-10 Tage</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bg-gradient-to-br from-accent-400 to-primary-400 rounded-2xl p-8 text-center">
+        <h3 class="text-xl font-bold text-neutral-900 mb-3">
+          Brauchen Sie professionelle Spachtelarbeiten?
+        </h3>
+        <p class="text-neutral-800 mb-6">
+          Kontaktieren Sie uns für eine Besichtigung und ein unverbindliches Angebot. Wir garantieren makellose Oberflächen.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WhatsAppButton 
+            variant="primary"
+            message={`Hallo, ich interessiere mich für Ihre Leistung "${service.shortTitle}". Können wir ein Angebot besprechen?`}
+          >
+            Per WhatsApp schreiben
+          </WhatsAppButton>
+          <PhoneButton variant="outline" class="border-neutral-700 text-neutral-900 hover:bg-neutral-900/10">
+            Anrufen
+          </PhoneButton>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <FAQ items={faqs} title={`Häufige Fragen zu ${service.shortTitle}`} />
+</Layout>

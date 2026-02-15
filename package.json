@@ -1,0 +1,27 @@
+{
+  "name": "diell-dienstleistungen",
+  "version": "1.0.0",
+  "description": "Diell Dienstleistungen - Renovierung & Innenausbau in Laichingen",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.4.0",
+    "@astrojs/sitemap": "^3.1.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "tailwindcss": "^3.4.1",
+    "astro-seo": "^0.8.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

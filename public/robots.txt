@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://diell-dienstleistungen.de/sitemap-index.xml
+
+# Disallow private pages
+Disallow: /404
+Disallow: /404.html
+
+# Crawl-delay for all bots
+Crawl-delay: 10

@@ -1,0 +1,160 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const pageTitle = 'Cookie-Einstellungen | Diell Dienstleistungen';
+const pageDescription = 'Verwalten Sie Ihre Cookie-Einstellungen. Informationen zu allen auf dieser Website verwendeten Cookies.';
+
+const breadcrumbs = [
+  { name: 'Cookie-Einstellungen', url: '/cookies/' }
+];
+
+const cookieCategories = [
+  {
+    id: 'necessary',
+    name: 'Notwendige Cookies',
+    required: true,
+    description: 'Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden. Sie ermöglichen grundlegende Funktionen wie Seitennavigation und Zugriff auf sichere Bereiche der Website.',
+    cookies: [
+      { name: 'diell_cookie_consent', purpose: 'Speichert Ihre Cookie-Einwilligungseinstellungen', duration: '1 Jahr' }
+    ]
+  },
+  {
+    id: 'preferences',
+    name: 'Präferenz-Cookies',
+    required: false,
+    description: 'Diese Cookies ermöglichen es der Website, sich an Ihre Entscheidungen und Präferenzen zu erinnern (z.B. Spracheinstellungen, Region) und erweiterte, persönliche Funktionen anzubieten.',
+    cookies: [
+      { name: 'user_preferences', purpose: 'Speichert Benutzereinstellungen', duration: '1 Jahr' }
+    ]
+  },
+  {
+    id: 'statistics',
+    name: 'Statistik-Cookies',
+    required: false,
+    description: 'Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem sie Informationen anonym sammeln und melden. Sie helfen uns, unsere Website zu verbessern.',
+    cookies: [
+      { name: '_ga', purpose: 'Google Analytics: Unterscheidet Benutzer', duration: '2 Jahre' },
+      { name: '_gid', purpose: 'Google Analytics: Unterscheidet Benutzer', duration: '24 Stunden' },
+      { name: '_gat', purpose: 'Google Analytics: Drosselt Anfragerate', duration: '1 Minute' }
+    ]
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing-Cookies',
+    required: false,
+    description: 'Diese Cookies werden verwendet, um Besuchern relevante Werbung anzuzeigen und Marketingkampagnen zu messen. Sie verfolgen Besucher über Websites hinweg und sammeln Informationen, um angepasste Werbung zu liefern.',
+    cookies: [
+      { name: '_fbp', purpose: 'Facebook Pixel: Anzeigen-Tracking', duration: '3 Monate' }
+    ]
+  }
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  noindex={true}
+>
+  <section class="bg-neutral-50 py-12 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <h1 class="text-3xl lg:text-4xl font-bold text-neutral-900 mt-6 mb-4">
+        Cookie-Einstellungen
+      </h1>
+      <p class="text-neutral-600 mb-8">
+        Hier können Sie Ihre Cookie-Einstellungen verwalten und detaillierte Informationen zu den 
+        auf dieser Website verwendeten Cookies einsehen.
+      </p>
+      
+      <!-- Cookie Settings Button -->
+      <div class="bg-white rounded-xl shadow-soft p-6 mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-semibold text-neutral-900">Cookie-Einwilligung</h2>
+            <p class="text-sm text-neutral-600">Ändern Sie Ihre aktuellen Cookie-Einstellungen</p>
+          </div>
+          <button 
+            id="open-cookie-settings"
+            class="px-6 py-3 bg-primary-400 hover:bg-primary-500 text-neutral-900 font-medium rounded-lg transition-colors"
+          >
+            Einstellungen öffnen
+          </button>
+        </div>
+      </div>
+
+      <!-- Cookie Details -->
+      <div class="space-y-6">
+        {cookieCategories.map((category) => (
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <div class="p-6 border-b border-neutral-100">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-lg font-semibold text-neutral-900">{category.name}</h2>
+                {category.required && (
+                  <span class="px-3 py-1 bg-accent-300 text-neutral-800 text-xs font-medium rounded-full">
+                    Immer aktiv
+                  </span>
+                )}
+              </div>
+              <p class="text-neutral-600 text-sm">{category.description}</p>
+            </div>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="bg-neutral-50">
+                  <tr>
+                    <th class="px-6 py-3 text-left font-semibold text-neutral-700">Cookie-Name</th>
+                    <th class="px-6 py-3 text-left font-semibold text-neutral-700">Zweck</th>
+                    <th class="px-6 py-3 text-left font-semibold text-neutral-700">Speicherdauer</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-100">
+                  {category.cookies.map((cookie) => (
+                    <tr>
+                      <td class="px-6 py-4 font-mono text-neutral-900">{cookie.name}</td>
+                      <td class="px-6 py-4 text-neutral-600">{cookie.purpose}</td>
+                      <td class="px-6 py-4 text-neutral-600">{cookie.duration}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Additional Information -->
+      <div class="mt-8 bg-white rounded-xl shadow-soft p-6">
+        <h2 class="text-lg font-semibold text-neutral-900 mb-4">
+          Weitere Informationen
+        </h2>
+        <div class="prose prose-sm text-neutral-600">
+          <p>
+            Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden 
+            und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder 
+            generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers 
+            aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+          </p>
+          <p class="mt-4">
+            Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in unserer 
+            <a href="/datenschutz/" class="text-primary-600 hover:underline">Datenschutzerklärung</a>.
+          </p>
+        </div>
+      </div>
+      
+      <p class="text-center text-sm text-neutral-500 mt-8">
+        Stand: Februar 2026
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.getElementById('open-cookie-settings')?.addEventListener('click', function() {
+      if (window.CookieConsent) {
+        window.CookieConsent.openModal();
+      }
+    });
+  </script>
+</Layout>

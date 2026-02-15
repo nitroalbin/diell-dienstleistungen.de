@@ -1,0 +1,208 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import FAQ from '@components/FAQ.astro';
+import WhatsAppButton from '@components/WhatsAppButton.astro';
+import PhoneButton from '@components/PhoneButton.astro';
+import { services, companyData, generateServiceSchema, generateFAQSchema } from '@content/company-data';
+
+const service = services.find(s => s.slug === 'flurgestaltung')!;
+
+const breadcrumbs = [
+  { name: 'Leistungen', url: '/leistungen/' },
+  { name: service.shortTitle, url: `/leistungen/${service.slug}/` }
+];
+
+const faqs = [
+  {
+    question: 'Was kostet eine Flurgestaltung?',
+    answer: 'Die Kosten hängen vom Umfang ab: Eine einfache Neugestaltung mit Farbe und Boden beginnt bei etwa 1.500€, während eine umfassende Renovierung mit Trockenbau und Beleuchtung 3.000-5.000€ kosten kann. Wir erstellen Ihnen gerne ein individuelles Angebot.'
+  },
+  {
+    question: 'Wie lange dauert die Gestaltung eines Flurs?',
+    answer: 'Für einen Standardflur (ca. 10-15m²) benötigen wir in der Regel 3-5 Arbeitstage. Dies umfasst Vorbereitung, eventuelle Trockenbauarbeiten, Spachteln, Malerarbeiten und Bodenverlegung.'
+  },
+  {
+    question: 'Welche Trends gibt es bei der Flurgestaltung?',
+    answer: 'Aktuell beliebt sind: indirekte LED-Beleuchtung in Decken und Wänden, offene Garderoben-Systeme, großformatige Fliesen oder Vinylboden, Akzentwände in kräftigen Farben oder mit Tapeten, sowie integrierter Stauraum durch Einbauschränke.'
+  },
+  {
+    question: 'Können Sie auch kleine/dunkle Flure optisch vergrößern?',
+    answer: 'Absolut! Durch den Einsatz von hellen Farben, großen Spiegeln, indirekter Beleuchtung und dem Verzicht auf zu viele Schränke lässt sich selbst ein kleiner Flur optisch aufwerten. Wir beraten Sie gerne zu den besten Lösungen für Ihren Raum.'
+  }
+];
+
+const serviceSchema = generateServiceSchema(service);
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<Layout 
+  title={service.metaTitle}
+  description={service.metaDescription}
+  breadcrumbs={breadcrumbs}
+  schema={[serviceSchema, faqSchema]}
+>
+  <section class="bg-neutral-900 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      
+      <div class="mt-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            {service.h1}
+          </h1>
+          <p class="text-neutral-400 text-lg mb-6">
+            Ihr Flur ist die Visitenkarte Ihres Zuhauses. Wir gestalten ihn funktional, 
+            einladend und stilvoll – von der Idee bis zur Umsetzung.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <WhatsAppButton 
+              variant="whatsapp" 
+              message="Hallo, ich möchte meinen Flur neu gestalten lassen. Können wir ein Angebot besprechen?"
+              size="lg"
+            >
+              Per WhatsApp schreiben
+            </WhatsAppButton>
+            <PhoneButton variant="outline" size="lg" class="border-neutral-500 text-white hover:bg-white/10">
+              Anrufen
+            </PhoneButton>
+          </div>
+        </div>
+        
+        <div class="aspect-video bg-gradient-to-br from-accent-100 to-primary-100 rounded-2xl overflow-hidden">
+          <img 
+            src="/images/flurgestaltung.jpeg" 
+            alt="Flurgestaltung - Moderner und einladender Eingangsbereich"
+            class="w-full h-full object-cover"
+            width="800"
+            height="450"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="prose prose-lg max-w-none mb-12">
+        <p class="text-xl text-neutral-600 leading-relaxed">
+          Der <strong>Flur</strong> ist das erste, was Besucher von Ihrem Zuhause sehen – und das letzte, 
+          was Sie selbst vor dem Verlassen wahrnehmen. Eine durchdachte <strong>Flurgestaltung in Laichingen</strong> 
+          schafft nicht nur einen positiven ersten Eindruck, sondern optimiert auch die Funktionalität dieses 
+          wichtigen Übergangsbereichs.
+        </p>
+      </div>
+
+      <section class="mb-12" aria-labelledby="concept-heading">
+        <h2 id="concept-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Konzeption und Planung
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Jede erfolgreiche Flurgestaltung beginnt mit einer sorgfältigen Analyse Ihrer Bedürfnisse und des vorhandenen Raums:
+          </p>
+          <ul class="space-y-3 mt-4">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">1</span>
+              <span><strong>Raumanalyse:</strong> Wir erfassen Lichtverhältnisse, Durchgangsbereiche und vorhandene Strukturen.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">2</span>
+              <span><strong>Bedarfsermittlung:</strong> Garderobe, Schuhablage, Spiegel, Dekoration – was brauchen Sie?</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">3</span>
+              <span><strong>Stilfindung:</strong> Modern, klassisch, minimalistisch oder gemütlich – wir finden Ihren Look.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 text-sm font-bold">4</span>
+              <span><strong>Lichtkonzept:</strong> Optimale Beleuchtung für verschiedene Tageszeiten und Zwecke.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="elements-heading">
+        <h2 id="elements-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Gestaltungselemente und Materialien
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Für Ihre Flurgestaltung stehen Ihnen zahlreiche Möglichkeiten offen:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6 not-prose">
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Böden</h4>
+              <p class="text-sm">Fliesen, Vinyl, Laminat oder Designboden – strapazierfähig und pflegeleicht.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Wände</h4>
+              <p class="text-sm">Farbe, Tapete, Holzverkleidung oder Trockenbau mit integriertem Stauraum.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Decken</h4>
+              <p class="text-sm">Abgehängte Decken mit indirekter Beleuchtung oder dekorativen Elementen.</p>
+            </div>
+            <div class="p-4 bg-neutral-50 rounded-lg">
+              <h4 class="font-semibold text-neutral-900 mb-2">Beleuchtung</h4>
+              <p class="text-sm">Deckenspots, Wandleuchten, LED-Streifen oder stimmungsvolle Pendelleuchten.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="text-2xl font-bold text-neutral-900 mb-6">
+          Zeitrahmen und Ablauf
+        </h2>
+        <div class="prose max-w-none text-neutral-600">
+          <p>
+            Typischer Ablauf einer Flurgestaltung:
+          </p>
+          <div class="mt-6 space-y-3 not-prose">
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Beratung & Planung</span>
+              <span class="text-accent-700 font-semibold">1 Tag</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Vorbereitung & Abdeckung</span>
+              <span class="text-accent-700 font-semibold">0,5 Tage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Trockenbau/Grundierung</span>
+              <span class="text-accent-700 font-semibold">1-2 Tage</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+              <span class="font-medium text-neutral-900">Oberflächen & Beleuchtung</span>
+              <span class="text-accent-700 font-semibold">2-3 Tage</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bg-gradient-to-br from-accent-400 to-primary-400 rounded-2xl p-8 text-center">
+        <h3 class="text-xl font-bold text-neutral-900 mb-3">
+          Lassen Sie Ihren Flur neu erstrahlen
+        </h3>
+        <p class="text-neutral-800 mb-6">
+          Kontaktieren Sie uns für ein unverbindliches Beratungsgespräch. Gemeinsam finden wir die perfekte Lösung für Ihren Eingangsbereich.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <WhatsAppButton 
+            variant="primary"
+            message={`Hallo, ich interessiere mich für Ihre Leistung "${service.shortTitle}". Können wir ein Angebot besprechen?`}
+          >
+            Per WhatsApp schreiben
+          </WhatsAppButton>
+          <PhoneButton variant="outline" class="border-neutral-700 text-neutral-900 hover:bg-neutral-900/10">
+            Anrufen
+          </PhoneButton>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <FAQ items={faqs} title={`Häufige Fragen zur ${service.shortTitle}`} />
+</Layout>

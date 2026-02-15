@@ -1,0 +1,180 @@
+---
+import { SEO } from 'astro-seo';
+import CookieConsent from '@components/CookieConsent.astro';
+import Navigation from '@components/Navigation.astro';
+import Footer from '@components/Footer.astro';
+import StickyCTA from '@components/StickyCTA.astro';
+import { companyData, generateLocalBusinessSchema, generateBreadcrumbSchema } from '@content/company-data';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  schema?: object;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  noindex?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  canonical,
+  ogImage = '/images/og-default.jpg',
+  schema,
+  breadcrumbs,
+  noindex = false
+} = Astro.props;
+
+const siteUrl = 'https://diell-dienstleistungen.de';
+const fullCanonical = canonical || `${siteUrl}${Astro.url.pathname}`;
+
+// Generate schemas
+const localBusinessSchema = generateLocalBusinessSchema();
+const breadcrumbSchema = breadcrumbs ? generateBreadcrumbSchema(breadcrumbs) : null;
+
+const schemas = [localBusinessSchema];
+if (breadcrumbSchema) schemas.push(breadcrumbSchema);
+if (schema) schemas.push(schema);
+---
+
+<!DOCTYPE html>
+<html lang="de-DE" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#fad447" />
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+  
+  <!-- SEO -->
+  <SEO
+    title={title}
+    description={description}
+    canonical={fullCanonical}
+    noindex={noindex}
+    openGraph={{
+      basic: {
+        title: title,
+        type: 'website',
+        image: `${siteUrl}${ogImage}`,
+        url: fullCanonical,
+      },
+      optional: {
+        description: description,
+        locale: 'de_DE',
+        siteName: companyData.name,
+      },
+    }}
+    twitter={{
+      card: 'summary_large_image',
+      title: title,
+      description: description,
+      image: `${siteUrl}${ogImage}`,
+    }}
+  />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  
+  <!-- Hreflang (Deutsch only) -->
+  <link rel="alternate" hreflang="de" href={fullCanonical} />
+  <link rel="alternate" hreflang="x-default" href={fullCanonical} />
+  
+  <!-- Structured Data -->
+  {schemas.map((s, i) => (
+    <script type="application/ld+json" set:html={JSON.stringify(s)} />
+  ))}
+  
+  <!-- Critical CSS inline -->
+  <style is:inline>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --color-primary: #fad447;
+      --color-accent: #b4f460;
+      --color-text: #262626;
+      --color-bg: #ffffff;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Prevent FOUC */
+    .js-loading * {
+      transition: none !important;
+    }
+    
+    /* Focus visible for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--color-primary);
+      color: var(--color-text);
+      padding: 8px 16px;
+      z-index: 10000;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+  
+  <!-- Google Fonts with font-display: swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="js-loading antialiased text-neutral-800 bg-white">
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  
+  <div class="flex flex-col min-h-screen">
+    <Navigation />
+    
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    
+    <Footer />
+    <StickyCTA />
+  </div>
+  
+  <CookieConsent />
+  
+  <!-- Remove FOUC prevention class after load -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.remove('js-loading');
+    });
+  </script>
+</body>
+</html>
