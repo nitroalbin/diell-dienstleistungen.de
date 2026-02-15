@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+// import sitemap from '@astrojs/sitemap'; // TEMP: Disabled due to bug in v3.1.0
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
@@ -8,12 +8,7 @@ export default defineConfig({
   output: 'static',
   integrations: [
     tailwind(),
-    sitemap({
-      filter: (page) => !page.includes('/404'),
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
+    // sitemap(), // TEMP: Disabled due to bug - see https://github.com/withastro/astro/issues
   ],
   build: {
     format: 'directory',
